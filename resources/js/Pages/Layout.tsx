@@ -12,7 +12,7 @@ export default function Layout({ children }) {
                         <Link href="/about">About</Link>
                     </li>
                     <li>
-                        <Link href="/contact">Contact</Link>
+                        <Link href="/vehicles">Vehicles</Link>
                     </li>
                 </ul>
             </header>
