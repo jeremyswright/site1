@@ -6,6 +6,7 @@ use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
 use App\Models\Vehicle;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -68,7 +69,19 @@ class VehicleController extends Controller
      */
     public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
     {
-        //
+        try {
+            $vehicle->update([
+                'name' => $request->name,
+                'registration' => $request->registration
+            ]);
+        } catch (\Throwable $th) {
+            $message = 'failed to update vehicle: ' . $th->getMessage();
+            Log::error(basename(__FILE__, '.php') . '->' . __FUNCTION__ . ': ' . $message);
+
+            return back()->withErrors($th->getMessage());
+        }
+
+        return redirect('/vehicles');
     }
 
     /**
