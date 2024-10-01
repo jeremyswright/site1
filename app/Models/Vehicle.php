@@ -12,6 +12,7 @@ class Vehicle extends Model
     protected $fillable = [
         'name',
         'registration',
+        'no_seats',
         'can_tow'
     ];
 }

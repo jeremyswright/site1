@@ -6,6 +6,7 @@ use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
 use App\Models\Vehicle;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -39,9 +40,22 @@ class VehicleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreVehicleRequest $request)
+    public function store(StoreVehicleRequest $request): RedirectResponse
     {
-        //
+        try {
+            Vehicle::create([
+                'name' => $request->name,
+                'registration' => $request->registration,
+                'no_seats' => $request->no_seats
+            ]);
+
+            return to_route('vehicles.index')->with(['message' => 'vehicle created successfully']);
+        } catch (\Throwable $th) {
+            $message = 'failed: ' . $th->getMessage();
+            Log::info(basename(__FILE__, '.php') . '->' . __FUNCTION__ . ': ' . $message);
+
+            return back()->with(['error' => $message]);
+        }
     }
 
     /**
