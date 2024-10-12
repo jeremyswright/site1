@@ -8,6 +8,11 @@
         "noEmit": true,
         "jsx": "react-jsx",
         "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "baseUrl": ".",
+        "paths": {
+            "@components/*": ["./Components/*"],
+            "@types/*": ["./Types/*"],
+        }
     }
 }
