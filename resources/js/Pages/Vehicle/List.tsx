@@ -1,36 +1,45 @@
 import Layout from '../Layout'
 import { Head, usePage } from '@inertiajs/react'
 import { PagePropsInterface } from '../../Types/Inertia'
+import { VehicleInterface } from '../../Types/Vehicle'
+import { FormButton } from '../../Components/FormButton';
 
-export default function List({ vehicles }) {
-    const { flash } = usePage<PagePropsInterface>().props
+interface ListProps {
+    vehicles: VehicleInterface[];
+}
 
-    console.dir(flash)
-
+export default function List({ vehicles }: ListProps) {
     return (
         <Layout>
             <Head title="Vehicle List" />
             <p>Vehicle List</p>
 
-            {flash.message && (
-                <div className="alert">{flash.message}</div>
-            )}
-
-            <ul>
-                {vehicles.length ? (
-                    vehicles.map((row) => {
-                        return (
-                            <div key={Math.random()}>
-                                <li className="md:align-text-left align-text-top md:table-row flex flex-wrap w-full md:flex-row flex-col border-b md:border-b-0 leading-normal">
-                                    {JSON.stringify(row)}
-                                </li>
-                            </div>
-                        )
-                    })
-                ) : (
-                    <li key={Math.random()}>Nothing found</li>
-                )}
-            </ul>
-        </Layout>
+            <table className='w-full'>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Registration</th>
+                        <th>Name</th>
+                        <th>No Seats</th>
+                        <th>Can Tow</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {vehicles.map(vehicle => (
+                        <tr key={vehicle.id}>
+                            <td>
+                                <FormButton onClick={() => window.location.href = `/vehicles/${vehicle.id}`}>Details</FormButton>
+                            </td>
+                            <td>
+                                {vehicle.registration}
+                            </td>
+                            <td>{vehicle.name}</td>
+                            <td>{vehicle.no_seats}</td>
+                            <td>{vehicle.can_tow ? 'Yes' : 'No'}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </Layout >
     )
 }
