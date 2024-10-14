@@ -22,7 +22,11 @@ class StoreVehicleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required'],
+            'registration' => ['required'],
+            'no_seats' => ['required', 'integer', 'min:1'],
+            'can_tow' => ['required', 'boolean'],
+            'purchase_price' => ['required', 'numeric', 'min:0'],
         ];
     }
 }

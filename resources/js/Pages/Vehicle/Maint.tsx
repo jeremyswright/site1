@@ -6,6 +6,7 @@ import { FieldGroup } from '@/Components/FieldGroup'
 import { FieldLabel } from '@/Components/FieldLabel'
 import { FieldInput } from '@/Components/FieldInput'
 import { FormButton } from '@/Components/FormButton'
+import FinancialInput from '@/Components/FinancialInput'
 
 export default function Maint({ vehicle }) {
     const { flash } = usePage<PagePropsInterface>().props
@@ -15,11 +16,14 @@ export default function Maint({ vehicle }) {
         registration: vehicle.registration,
         no_seats: vehicle.no_seats,
         can_tow: vehicle.can_tow,
+        purchase_price: vehicle.purchase_price,
     })
 
     const route = useRoute();
 
     function handleChange(e) {
+        console.dir(e)
+
         const key = e.target.name;
         const value = e.target.value
         setData(data => ({
@@ -63,6 +67,11 @@ export default function Maint({ vehicle }) {
                 <FieldGroup>
                     <FieldLabel className="md:w-1/2" label='Capacity' />
                     <FieldInput type='number' name='no_seats' value={data.no_seats} onChange={handleChange} />
+                </FieldGroup>
+
+                <FieldGroup>
+                    <FieldLabel className="md:w-1/2" label='Purchase price' />
+                    <FinancialInput name='purchase_price' value={Number(data.purchase_price)} onChange={handleChange} />
                 </FieldGroup>
 
                 {route().current() != 'vehicles.show' &&

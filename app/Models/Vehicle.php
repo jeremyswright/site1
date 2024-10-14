@@ -13,6 +13,7 @@ class Vehicle extends Model
         'name',
         'registration',
         'no_seats',
-        'can_tow'
+        'can_tow',
+        'purchase_price',
     ];
 }

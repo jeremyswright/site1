@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVehicleRequest;
-use App\Http\Requests\UpdateVehicleRequest;
 use App\Models\Vehicle;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
@@ -46,7 +44,9 @@ class VehicleController extends Controller
             Vehicle::create([
                 'name' => $request->name,
                 'registration' => $request->registration,
-                'no_seats' => $request->no_seats
+                'no_seats' => $request->no_seats,
+                'can_tow' => $request->can_tow,
+                'purchase_price' => $request->purchase_price,
             ]);
 
             return to_route('vehicles.index')->with(['message' => 'vehicle created successfully']);
@@ -81,12 +81,15 @@ class VehicleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
+    public function update(StoreVehicleRequest $request, Vehicle $vehicle)
     {
         try {
             $vehicle->update([
                 'name' => $request->name,
-                'registration' => $request->registration
+                'registration' => $request->registration,
+                'no_seats' => $request->no_seats,
+                'can_tow' => $request->can_tow,
+                'purchase_price' => $request->purchase_price,
             ]);
         } catch (\Throwable $th) {
             $message = 'failed to update vehicle: ' . $th->getMessage();
