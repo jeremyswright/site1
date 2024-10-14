@@ -95,7 +95,7 @@ class VehicleController extends Controller
             return back()->withErrors($th->getMessage());
         }
 
-        return redirect('/vehicles');
+        return to_route('vehicles.index')->with(['message' => 'vehicle updated successfully']);
     }
 
     /**

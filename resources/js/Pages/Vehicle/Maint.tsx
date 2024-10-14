@@ -49,7 +49,7 @@ export default function Maint({ vehicle }) {
                 <div className="alert">{flash.error}</div>
             )}
 
-            <form onSubmit={handleSubmit}>
+            <form className="mx-3" onSubmit={handleSubmit}>
                 <FieldGroup>
                     <FieldLabel className="md:w-1/2" label='Name' />
                     <FieldInput type='text' name='name' value={data.name} onChange={handleChange} />
