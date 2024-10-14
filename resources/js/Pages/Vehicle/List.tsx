@@ -1,8 +1,7 @@
 import Layout from '../Layout'
 import { Head, usePage } from '@inertiajs/react'
-import { PagePropsInterface } from '../../Types/Inertia'
-import { VehicleInterface } from '../../Types/Vehicle'
-import { FormButton } from '../../Components/FormButton';
+import { FormButton } from '@/Components/FormButton';
+import { VehicleInterface } from '@/Types/Vehicle';
 
 interface ListProps {
     vehicles: VehicleInterface[];

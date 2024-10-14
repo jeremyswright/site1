@@ -11,8 +11,9 @@
         "esModuleInterop": true,
         "baseUrl": ".",
         "paths": {
-            "@components/*": ["./Components/*"],
-            "@types/*": ["./Types/*"],
+            "@/*": ["resources/js/*"],
+            "@components/*": ["resources/js/Components/*"],
+            "@types/*": ["resources/js/Types/*"]
         }
     }
 }

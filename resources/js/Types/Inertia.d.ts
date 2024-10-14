@@ -14,5 +14,6 @@ export interface PagePropsInterface extends Page<PageProps> {
     },
     auth: {
         user: User;
-    };
+    },
+    [key: string]: any; // Add index signature
 }
